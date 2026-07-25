@@ -3,3 +3,6 @@ torch
 torchvision
 pillow
 tqdm
+pandas
+sage-data-client
+Pillow
