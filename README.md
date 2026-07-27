@@ -33,7 +33,7 @@ We originally intended to use the SAGE nodes' own `pm2.5` readings, but after do
 
 ### PurpleAir ground truth
 
-For each SAGE node we identified the geographically closest PurpleAir station and downloaded the past 14 days of measurements. Because the PurpleAir API was not functioning well, data was pulled through the web interface's historical export, which is limited to the most recent 14 days. Raw reference CSVs live in `purple_air_ref_pm/` (one per node, e.g. `W0A4_ref_pm.csv`).
+For each SAGE node we identified the geographically closest PurpleAir station and downloaded the past 14 days of measurements. Raw reference CSVs live in `purple_air_ref_pm/` (one per node, e.g. `W0A4_ref_pm.csv`). We downloaded specifically the US EPA PM2.5 (AQI) data, as we could use the EPA's air quality categories, where any value over 150 qualifies as "Unhealthy" (for all groups).
 
 The merge step (`data_processing_scripts/merge_purple_air_pm25.py`) does the following:
 
@@ -53,7 +53,7 @@ The result is written back to `all_data.csv`, which contains one row per image:
 
 `data_processing_scripts/prepare_yolo_dataset.py` turns `all_data.csv` and the downloaded images into a YOLO classification dataset:
 
-- **Labels**: images are labelled `bad` when `purple_air_pm25 >= 55.5`, otherwise `good`.
+- **Labels**: images are labelled `bad` when `purple_air_pm25 >= 151`, otherwise `good`.
 - **Day/night filter**: images can be restricted to daytime (05:00–21:00 Chicago time), nighttime, or both.
 - **Per-day stratified split**: images are grouped by `(date, label)` and each group is split **70/20/10** into train/val/test. Splitting per day guarantees that no single day is assigned entirely to one split, so every day is represented across all three splits.
 - **Class balancing**: after splitting, the majority class in each split is randomly downsampled so that every split has a **uniform 50/50 good/bad distribution**.
