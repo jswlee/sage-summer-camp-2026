@@ -116,7 +116,7 @@ python training_scripts/train_yolo_classification.py
 
 Training is handled by `training_scripts/train_yolo_classification.py` (with test-set inference and visualization in `training_scripts/visualize_yolo_classification.py`).
 
-The best run, saved in `model_training_and_inference_results/`, used the following configuration:
+The best run is saved in `151-threshold-model-results/` and used the following configuration (see `151-threshold-model-results/args.yaml`):
 
 - **Model**: `yolo26s-cls`
 - **Batch size**: 8
@@ -124,6 +124,14 @@ The best run, saved in `model_training_and_inference_results/`, used the followi
 - **Patience**: 0 (no early stopping)
 - **Image size**: 224×224 (trained on the `yolo_dataset_daynight_224` set)
 
-This configuration reached a **top-1 accuracy of 0.94** on the test set. Because the dataset is balanced to a uniform 50/50 good/bad distribution, this is a meaningful accuracy rather than an artifact of class imbalance. It also demonstrates that a lightweight model running on small 224×224 inputs is enough to get strong results.
+Test-set performance from `151-threshold-model-results/test_inference/test_metrics.csv`:
 
-The full argument set for this run is stored in `model_training_and_inference_results/args.yaml`, alongside `results.csv`, training/validation plots, confusion matrices, and the trained `weights/`.
+| Class   | Precision | Recall | F1     | Support |
+|---------|-----------|--------|--------|---------|
+| bad     | 0.930     | 0.952  | 0.941  | 42      |
+| good    | 0.951     | 0.929  | 0.940  | 42      |
+| **accuracy** | **0.940** |        |        | **84**  |
+
+Because the dataset is balanced to a uniform 50/50 good/bad distribution, this accuracy is meaningful rather than an artifact of class imbalance. It also demonstrates that a lightweight model running on small 224×224 inputs is enough to get strong results.
+
+The full argument set for this run is stored in `151-threshold-model-results/args.yaml`, alongside `results.csv`, training/validation plots, confusion matrices, and the trained `weights/`.
