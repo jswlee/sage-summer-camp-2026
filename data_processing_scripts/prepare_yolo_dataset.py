@@ -67,8 +67,8 @@ def main() -> None:
     parser.add_argument(
         "--threshold",
         type=float,
-        default=55.5,
-        help="purple_air_pm25 below this is 'good', at/above is 'bad'.",
+        default=151.0,
+        help="PurpleAir AQI value below this is 'good', at/above is 'bad'.",
     )
     parser.add_argument(
         "--imgsz",
@@ -181,7 +181,7 @@ def main() -> None:
     if missing_pm25:
         print(f"  Skipped {missing_pm25} rows with empty purple_air_pm25")
     print(f"  Time of day: {args.time_of_day} (Chicago time)")
-    print(f"  Threshold: pm2.5 >= {args.threshold} -> bad, else good")
+    print(f"  Threshold: AQI >= {args.threshold} -> bad, else good")
     print("  Split breakdown:")
     header = f"    {'split':<6} {'good':>7} {'bad':>7} {'total':>7}"
     print(header)
