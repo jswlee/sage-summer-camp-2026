@@ -119,11 +119,11 @@ Training is handled by `training_scripts/train_yolo_classification.py` (with tes
 The best run, saved in `model_training_and_inference_results/`, used the following configuration:
 
 - **Model**: `yolo26s-cls`
-- **Batch size**: 16
+- **Batch size**: 8
 - **Epochs**: 200
 - **Patience**: 0 (no early stopping)
 - **Image size**: 224×224 (trained on the `yolo_dataset_daynight_224` set)
 
-This configuration reached a **top-1 accuracy of 0.83** on the test set. Because the dataset is balanced to a uniform 50/50 good/bad distribution, this is a meaningful accuracy rather than an artifact of class imbalance. It also demonstrates that a lightweight model running on small 224×224 inputs is enough to get strong results.
+This configuration reached a **top-1 accuracy of 0.94** on the test set. Because the dataset is balanced to a uniform 50/50 good/bad distribution, this is a meaningful accuracy rather than an artifact of class imbalance. It also demonstrates that a lightweight model running on small 224×224 inputs is enough to get strong results.
 
 The full argument set for this run is stored in `model_training_and_inference_results/args.yaml`, alongside `results.csv`, training/validation plots, confusion matrices, and the trained `weights/`.
